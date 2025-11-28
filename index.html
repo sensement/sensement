@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Sensement | Dark Neoclassical Music Project. Experience the fusion of human storytelling and AI composition in the debut album 'Tragic Art'. Listen to 'Set the Fire' now.">
+    <meta name="keywords" content="Sensement, Dark Neoclassical, Gothic Music, Piano Ballad, Cinematic Waltz, AI Music, Tragic Art, New Artist">
+    <meta name="author" content="Sensement">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://sensementmusic.com/">
+    <title>Sensement | Tragic Art</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sensementmusic.com/">
+    <meta property="og:title" content="Sensement | Tragic Art - Official Music Site">
+    <meta property="og:description" content="Explore the world of Sensement. Dark Neoclassical music blending human lyrics with AI composition. Listen to the Midnight Sessions now.">
+    <meta property="og:image" content="https://sensementmusic.com/og-image.jpg">
+    <meta property="og:locale" content="en_US">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://sensementmusic.com/">
+    <meta name="twitter:title" content="Sensement | Dark Neoclassical Music">
+    <meta name="twitter:description" content="Where tragedy turns into art. Listen to the debut tracks from Sensement.">
+    <meta name="twitter:image" content="https://sensementmusic.com/og-image.jpg">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            background-image: url('bg.jpg'); /* تصویر پس‌زمینه */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Lato', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.15));
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .main-title {
+            font-family: 'Cinzel Decorative', cursive;
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin: 0 0 30px 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+        .btn {
+            display: block;
+            margin: 15px auto;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #eee;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #000;
+            border-color: #fff;
+            letter-spacing: 2px;
+            font-weight: 400;
+        }
+
+        /* استایل شبکه‌های اجتماعی */
+        .social-icons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* فاصله بین آیکون‌ها */
+        }
+
+        .social-link {
+            color: #aaa;
+            font-size: 1.5rem; /* سایز آیکون‌ها */
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #fff;
+            transform: translateY(-3px); /* حرکت به بالا هنگام هاور */
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+        }
+
+        .footer-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #666;
+            font-size: 0.75rem;
+            margin-top: 30px;
+            line-height: 1.8;
+        }
+        
+        .contact-link {
+            font-family: 'Lato', sans-serif;
+            font-style: normal;
+            font-size: 0.7rem;
+            color: #888;
+            text-decoration: none;
+            border-bottom: 1px dotted #666;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .contact-link:hover {
+            color: #fff;
+            border-color: #fff;
+        }
+
+    </style>
+
+    <script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "MusicGroup",
+    "name": "Sensement",
+    "url": "https://sensementmusic.com",
+    "logo": "https://sensementmusic.com/logo.png",
+    "image": "https://sensementmusic.com/og-image.jpg",
+    "description": "Dark Neoclassical music project blending human storytelling with AI composition.",
+    "sameAs": [
+        "https://instagram.com/SensementMusic",
+        "https://youtube.com/@Sensement",
+        "https://soundcloud.com/sensement",
+        "https://facebook.com/SensementMusic",
+        "https://tiktok.com/@SensementMusic"
+    ],
+    "genre": ["Dark Neoclassical", "Gothic", "Piano Ballad"],
+    "album": {
+        "@type": "MusicAlbum",
+        "name": "Tragic Art",
+        "albumReleaseType": "http://schema.org/StudioAlbum"
+    }
+    }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <img src="logo.png" alt="Sensement Official Logo - Gothic S with Rose" class="logo">
+        <h1 class="main-title">Sensement Music</h1>
+
+        <a href="https://soundcloud.com/sensement/set-the-fire-midnight" class="btn">🎧 Listen to "Set the Fire"</a>
+        <a href="https://youtube.com/@Sensement" class="btn">Watch Cinematic Videos</a>
+        
+        <div class="social-icons">
+            <a href="https://instagram.com/SensementMusic" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@Sensement" class="social-link" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://soundcloud.com/sensement" class="social-link" target="_blank" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+            <a href="https://facebook.com/SensementMusic" class="social-link" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://tiktok.com/@SensementMusic" class="social-link" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+        
+        <div class="footer-text">
+            © 2025 Sensement. All Rights Reserved.<br>
+            <a href="mailto:contact@sensementmusic.com" class="contact-link">Inquiries</a>
+        </div>
+    </div>
+
+</body>
+</html>
