@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar Scale Visualizer & Theory Chart | Sensement Music</title>
+    
+    <meta name="description" content="Free interactive Guitar Scale Visualizer by Sensement Music. Generate high-quality fretboard diagrams, chord charts, and music theory visuals for any scale and root note.">
+    <meta name="keywords" content="guitar scale visualizer, fretboard diagram generator, music theory chart, guitar chords, guitar scales, Sensement Music, Am scale, music education tools">
+    <meta name="author" content="Sensement Music">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sensementmusic.com/guitar-scale-visualizer">
+    <meta property="og:title" content="Guitar Scale Visualizer | Sensement Music">
+    <meta property="og:description" content="Generate custom guitar fretboard diagrams and theory charts instantly.">
+    <meta property="og:image" content="https://sensementmusic.com/guitar-scale-visualizer/visualizer-preview.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sensementmusic.com/guitar-scale-visualizer">
+    <meta property="twitter:title" content="Guitar Scale Visualizer | Sensement Music">
+    <meta property="twitter:description" content="Generate custom guitar fretboard diagrams and theory charts instantly.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Guitar Scale Visualizer",
+      "url": "https://sensementmusic.com/guitar-scale-visualizer",
+      "description": "An interactive tool to visualize guitar scales, fretboard patterns, and diatonic chords.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "author": {
+        "@type": "Organization",
+        "name": "Sensement Music",
+        "url": "https://sensementmusic.com"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --primary-color: #2c3e50;
+            --accent-color: #FDB827; 
+            --hover-color: #e67e22;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* --- Brand Header Styles --- */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .brand-link {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: #333;
+            letter-spacing: -1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .brand-link:hover {
+            color: var(--accent-color);
+            transform: scale(1.02);
+        }
+
+        /* --- Social Icons Styles --- */
+        .social-container {
+            margin-top: 15px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .social-link {
+            font-size: 1.8rem;
+            color: #555;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- Main Title & Instructions Styles --- */
+        .main-title {
+            margin: 30px 0 10px 0;
+            font-size: 2rem;
+            color: #222;
+        }
+        
+        .subtitle {
+            margin: 0 0 30px 0;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* --- Controls Styles --- */
+        .controls {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        select, button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            cursor: pointer;
+            outline: none;
+            transition: border 0.2s;
+            background-color: #fff;
+        }
+        
+        select:focus {
+            border-color: var(--accent-color);
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            font-weight: 600;
+            border: none;
+            transition: background 0.3s;
+        }
+
+        button:hover { 
+            background-color: var(--accent-color); 
+            color: #000;
+        }
+        
+        /* --- Canvas Container Styles --- */
+        .canvas-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+            flex-grow: 1; 
+            margin-bottom: 50px;
+        }
+        .canvas-wrapper {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .canvas-wrapper h3 {
+            margin-top: 0;
+            color: #555;
+            font-weight: 600;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- Footer Styles --- */
+        .site-footer {
+            margin-top: auto;
+            width: 100%;
+            text-align: center;
+            padding: 25px 0;
+            background-color: #fff;
+            border-top: 1px solid #eaeaea;
+            color: #888;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="brand-header">
+        <a href="https://sensementmusic.com/" target="_blank" class="brand-link">
+            Sensement Music
+        </a>
+        
+        <div class="social-container">
+            <a href="https://instagram.com/SensementMusic" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@Sensement" class="social-link" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://soundcloud.com/sensement" class="social-link" target="_blank" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+            <a href="https://facebook.com/SensementMusic" class="social-link" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://tiktok.com/@SensementMusic" class="social-link" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
+
+    <h1 class="main-title">🎸 Guitar Scale Visualizer</h1>
+    <p class="subtitle">Select a Root Note and Scale Type to generate diagrams.</p>
+
+    <div class="controls">
+        <select id="rootSelect"></select>
+        <select id="scaleSelect"></select>
+        <button onclick="generateVisuals()">Generate</button>
+        <button onclick="downloadImages()">Download Images</button>
+    </div>
+
+    <div class="canvas-container">
+        <div class="canvas-wrapper">
+            <h3>Fretboard</h3>
+            <canvas id="fretboardCanvas" width="600" height="1600"></canvas>
+        </div>
+
+        <div class="canvas-wrapper">
+            <h3>Theory & Chords</h3>
+            <canvas id="theoryCanvas" width="1000" height="900"></canvas>
+        </div>
+    </div>
+
+    <div class="site-footer">
+        © 2025 Sensement. All Rights Reserved.
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. DATA & CONSTANTS
+        // ==========================================
+        
+        const VALID_SCALES = {
+            'Major': [0, 2, 4, 5, 7, 9, 11],
+            'Minor': [0, 2, 3, 5, 7, 8, 10],
+            'Harmonic Minor': [0, 2, 3, 5, 7, 8, 11],
+            'Melodic Minor': [0, 2, 3, 5, 7, 9, 11],
+            'Pentatonic Major': [0, 2, 4, 7, 9],
+            'Pentatonic Minor': [0, 3, 5, 7, 10],
+            'Blues': [0, 3, 5, 6, 7, 10],
+            'Dorian': [0, 2, 3, 5, 7, 9, 10],
+            'Phrygian': [0, 1, 3, 5, 7, 8, 10],
+            'Lydian': [0, 2, 4, 6, 7, 9, 11],
+            'Mixolydian': [0, 2, 4, 5, 7, 9, 10],
+            'Locrian': [0, 1, 3, 5, 6, 8, 10]
+        };
+
+        const CHROMATIC_SCALE = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V", "VI", "VII"];
+        const OPEN_STRINGS = ['E', 'A', 'D', 'G', 'B', 'E']; // Low E to High E
+
+        // Colors configuration
+        const COLORS = {
+            root: '#FDB827',
+            noteBg: 'black',
+            textRoot: 'black',
+            textNote: 'white',
+            string: '#999999',
+            fret: '#BBBBBB',
+            nut: '#222222',
+            inlay: '#EEEEEE',
+            bg: 'white',
+            branding: '#999999' 
+        };
+
+        // ==========================================
+        // 2. HELPER FUNCTIONS
+        // ==========================================
+
+        function getScaleNotes(root, scaleName) {
+            const rootIdx = CHROMATIC_SCALE.indexOf(root);
+            const intervals = VALID_SCALES[scaleName];
+            return intervals.map(interval => CHROMATIC_SCALE[(rootIdx + interval) % 12]);
+        }
+
+        function getIntervalLabel(note1, note2) {
+            const idx1 = CHROMATIC_SCALE.indexOf(note1);
+            const idx2 = CHROMATIC_SCALE.indexOf(note2);
+            let semitones = (idx2 - idx1 + 12) % 12;
+            
+            if (semitones === 1) return "H";
+            if (semitones === 2) return "W";
+            if (semitones === 3) return "1½";
+            if (semitones === 4) return "2";
+            return semitones.toString();
+        }
+
+        function identifyChord(root, third, fifth) {
+            const rIdx = CHROMATIC_SCALE.indexOf(root);
+            const tIdx = CHROMATIC_SCALE.indexOf(third);
+            const fIdx = CHROMATIC_SCALE.indexOf(fifth);
+            
+            const d3 = (tIdx - rIdx + 12) % 12;
+            const d5 = (fIdx - rIdx + 12) % 12;
+
+            if (d3 === 4 && d5 === 7) return { q: "Major", s: "" };
+            if (d3 === 3 && d5 === 7) return { q: "Minor", s: "m" };
+            if (d3 === 3 && d5 === 6) return { q: "Dim", s: "dim" };
+            if (d3 === 4 && d5 === 8) return { q: "Aug", s: "aug" };
+            return { q: "Unknown", s: "?" };
+        }
+
+        // ==========================================
+        // 3. DRAWING FUNCTIONS
+        // ==========================================
+
+        function drawFretboard(root, scaleName) {
+            const canvas = document.getElementById('fretboardCanvas');
+            const ctx = canvas.getContext('2d');
+            const W = canvas.width;
+            const H = canvas.height;
+
+            // Clear Canvas
+            ctx.fillStyle = COLORS.bg;
+            ctx.fillRect(0, 0, W, H);
+
+            const scaleNotes = getScaleNotes(root, scaleName);
+            const activeSet = new Set(scaleNotes);
+
+            // Layout Constants
+            const numStrings = 6;
+            const numFrets = 24;
+            const marginX = 80;
+            const marginTop = 160; 
+            const marginBottom = 50;
+            
+            const boardWidth = W - (marginX * 2);
+            const boardHeight = H - marginTop - marginBottom;
+            const stringGap = boardWidth / (numStrings - 1);
+            const fretGap = boardHeight / numFrets;
+
+            // --- 1. Draw Frets & Nut (FIRST Layer) ---
+            for (let i = 0; i <= numFrets; i++) {
+                const y = marginTop + (i * fretGap);
+                
+                if (i === 0) {
+                    // --- Nut (Thick line) ---
+                    ctx.strokeStyle = COLORS.nut;
+                    ctx.lineWidth = 12;
+                    const nutOverhang = 6; // Make nut wider than the board
+                    ctx.beginPath();
+                    ctx.moveTo(marginX - nutOverhang, y);
+                    ctx.lineTo(W - marginX + nutOverhang, y);
+                    ctx.stroke();
+                } else {
+                    // Standard Frets
+                    ctx.beginPath();
+                    ctx.moveTo(marginX, y);
+                    ctx.lineTo(W - marginX, y);
+                    ctx.strokeStyle = COLORS.fret;
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+                }
+
+                // Fret Numbers
+                if (i > 0) {
+                    ctx.fillStyle = '#555';
+                    ctx.font = 'bold 24px Arial';
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'middle';
+                    // Positioned 40px left of string 6
+                    ctx.fillText(i, marginX - 40, y - (fretGap / 2));
+                }
+            }
+
+            // --- 2. Draw Strings (SECOND Layer) ---
+            const nutHalfThickness = 6; 
+
+            for (let i = 0; i < numStrings; i++) {
+                const x = marginX + (i * stringGap);
+                
+                ctx.beginPath();
+                // Start strings slightly lower (bottom edge of the nut)
+                ctx.moveTo(x, marginTop + nutHalfThickness); 
+                ctx.lineTo(x, H - marginBottom + 10); 
+                
+                // Variable string thickness
+                ctx.lineWidth = 2 + (numStrings - i - 1) * 1.5; 
+                ctx.strokeStyle = COLORS.string;
+                ctx.stroke();
+            }
+
+            // --- 3. Inlays ---
+            const singleDots = [3, 5, 7, 9, 15, 17, 19, 21];
+            const doubleDots = [12, 24];
+            
+            function drawInlay(fret, xRatio = 0.5) {
+                const y = marginTop + (fret * fretGap) - (fretGap / 2);
+                const x = marginX + (boardWidth * xRatio);
+                ctx.beginPath();
+                ctx.arc(x, y, 12, 0, Math.PI * 2);
+                ctx.fillStyle = COLORS.inlay;
+                ctx.fill();
+            }
+
+            singleDots.forEach(f => drawInlay(f));
+            doubleDots.forEach(f => {
+                drawInlay(f, 0.25);
+                drawInlay(f, 0.75);
+            });
+
+            // --- 4. Draw Notes ---
+            for (let s = 0; s < numStrings; s++) {
+                const openNote = OPEN_STRINGS[s];
+                const startIdx = CHROMATIC_SCALE.indexOf(openNote);
+
+                for (let f = 0; f <= numFrets; f++) {
+                    const currentNote = CHROMATIC_SCALE[(startIdx + f) % 12];
+                    
+                    if (activeSet.has(currentNote)) {
+                        const isRoot = (currentNote === root);
+                        const radius = isRoot ? 24 : 20;
+                        const bg = isRoot ? COLORS.root : COLORS.noteBg;
+                        const fg = isRoot ? COLORS.textRoot : COLORS.textNote;
+                        
+                        const x = marginX + (s * stringGap);
+                        let y;
+                        
+                        if (f === 0) {
+                            // Open string: Place ABOVE nut
+                            y = marginTop - 40;
+                        } else {
+                            // Fretted: Middle of fret
+                            y = marginTop + (f * fretGap) - (fretGap / 2);
+                        }
+
+                        // Draw Circle
+                        ctx.beginPath();
+                        ctx.arc(x, y, radius, 0, Math.PI * 2);
+                        ctx.fillStyle = bg;
+                        ctx.fill();
+
+                        // Draw Text
+                        ctx.fillStyle = fg;
+                        ctx.font = `bold ${isRoot ? '20px' : '18px'} Arial`;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(currentNote, x, y + 2);
+                    }
+                }
+            }
+
+            // Title inside Canvas
+            ctx.fillStyle = '#222';
+            ctx.font = 'bold 36px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(`${root} ${scaleName}`, W / 2, 60);
+
+            // Footer Branding inside Image
+            ctx.fillStyle = COLORS.branding;
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText("SensementMusic.com", W / 2, H - 20);
+        }
+
+        function drawTheoryChart(root, scaleName) {
+            const canvas = document.getElementById('theoryCanvas');
+            const ctx = canvas.getContext('2d');
+            const W = canvas.width;
+            const H = canvas.height;
+
+            // Clear Canvas
+            ctx.fillStyle = COLORS.bg;
+            ctx.fillRect(0, 0, W, H);
+
+            const scaleNotes = getScaleNotes(root, scaleName);
+            
+            // Check if 7-note scale (diatonic)
+            if (scaleNotes.length !== 7) {
+                ctx.fillStyle = '#666';
+                ctx.font = '30px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText("Chord chart available for 7-note diatonic scales only.", W/2, H/2);
+                ctx.fillText(`(${scaleName} has ${scaleNotes.length} notes)`, W/2, H/2 + 40);
+                
+                ctx.fillStyle = COLORS.branding;
+                ctx.font = '16px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText("SensementMusic.com", W / 2, H - 20);
+                return;
+            }
+
+            // --- Header ---
+            ctx.fillStyle = '#222';
+            ctx.font = 'bold 40px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(`${root} ${scaleName}`, W/2, 60);
+            
+            ctx.fillStyle = '#666';
+            ctx.font = '24px Arial';
+            ctx.fillText("Scale Structure & Diatonic Chords", W/2, 100);
+            
+            ctx.beginPath();
+            ctx.moveTo(100, 120);
+            ctx.lineTo(W-100, 120);
+            ctx.strokeStyle = '#DDD';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // --- Section 1: Notes & Intervals ---
+            const yNotesTitle = 180; 
+            const yNotes = 250;      
+            const startX = 100;
+            const spacing = (W - 200) / 7;
+
+            // Notes Title Centered
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#222';
+            ctx.font = 'bold 26px Arial';
+            ctx.fillText("Notes", W/2, yNotesTitle);
+
+            const displayNotes = [...scaleNotes, scaleNotes[0]]; // Add octave
+
+            for (let i = 0; i < displayNotes.length; i++) {
+                const note = displayNotes[i];
+                const x = startX + (i * spacing);
+                const isRoot = (i === 0 || i === 7);
+                
+                // Draw Connections and Intervals
+                if (i < displayNotes.length - 1) {
+                    const nextNote = displayNotes[i+1];
+                    const midX = x + (spacing / 2);
+                    
+                    // Line
+                    ctx.beginPath();
+                    ctx.moveTo(x + 25, yNotes);
+                    ctx.lineTo(x + spacing - 25, yNotes);
+                    ctx.strokeStyle = '#BBB';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    // Interval Bubble
+                    ctx.beginPath();
+                    ctx.arc(midX, yNotes, 15, 0, Math.PI*2);
+                    ctx.fillStyle = 'white';
+                    ctx.fill();
+                    ctx.strokeStyle = '#AAA';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                    
+                    // Interval Text
+                    ctx.fillStyle = '#555';
+                    ctx.font = 'bold 12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(getIntervalLabel(note, nextNote), midX, yNotes);
+                }
+
+                // Draw Note Circle
+                ctx.beginPath();
+                ctx.arc(x, yNotes, 30, 0, Math.PI*2);
+                ctx.fillStyle = isRoot ? COLORS.root : 'black';
+                ctx.fill();
+
+                // Note Text
+                ctx.fillStyle = isRoot ? 'black' : 'white';
+                ctx.font = 'bold 20px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(note, x, yNotes);
+
+                // Degree Number
+                const degree = (i < 7) ? (i + 1) : "8";
+                ctx.fillStyle = '#555';
+                ctx.font = '16px Arial';
+                ctx.fillText(degree, x, yNotes + 50);
+            }
+
+            // --- Section 2: Chords Table ---
+            const yTableTitle = 380; 
+            const yTableHead = 420;  
+            
+            // Chords Title Centered
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#222';
+            ctx.font = 'bold 26px Arial';
+            ctx.fillText("Chords", W/2, yTableTitle);
+
+            // Columns positions
+            const colDeg = 150;
+            const colName = 350;
+            const colNotes = 700;
+
+            // Header Text
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#444';
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText("Degree", colDeg, yTableHead);
+            ctx.fillText("Chord", colName, yTableHead);
+            ctx.fillText("Triad Notes", colNotes, yTableHead);
+
+            // Line under header
+            ctx.beginPath();
+            ctx.moveTo(100, yTableHead + 15);
+            ctx.lineTo(W-100, yTableHead + 15);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            const yStart = 480; 
+            const rowHeight = 50;
+
+            for (let i = 0; i < 7; i++) {
+                const y = yStart + (i * rowHeight);
+                
+                // Identify Chord
+                const root = scaleNotes[i];
+                const third = scaleNotes[(i + 2) % 7];
+                const fifth = scaleNotes[(i + 4) % 7];
+                const chordInfo = identifyChord(root, third, fifth);
+                
+                // Roman Numeral logic
+                let roman = ROMAN_NUMERALS[i];
+                if (chordInfo.q.includes("Minor")) roman = roman.toLowerCase();
+                if (chordInfo.q.includes("Dim")) roman = roman.toLowerCase() + "°";
+                if (chordInfo.q.includes("Aug")) roman += "+";
+
+                // Zebra Stripe background
+                if (i % 2 === 0) {
+                    ctx.fillStyle = '#F9F9F9';
+                    ctx.fillRect(100, y - 35, W - 200, rowHeight);
+                }
+
+                // 1. Degree
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 20px Arial';
+                ctx.textAlign = 'left';
+                ctx.fillText(roman, colDeg, y);
+
+                // 2. Chord Name
+                ctx.fillStyle = (i === 0) ? '#D35400' : 'black'; 
+                ctx.font = 'bold 22px Arial';
+                ctx.fillText(`${root}${chordInfo.s}`, colName, y);
+                
+                ctx.fillStyle = '#888';
+                ctx.font = 'italic 16px Arial';
+                ctx.fillText(`(${chordInfo.q})`, colName + 100, y);
+
+                // 3. Triad Notes Visuals
+                const triad = [root, third, fifth];
+                const noteSpacing = 80;
+
+                triad.forEach((n, idx) => {
+                    const nx = colNotes + (idx * noteSpacing);
+                    
+                    // Connector Line (behind dots)
+                    if (idx < 2) {
+                        ctx.beginPath();
+                        ctx.moveTo(nx, y - 5);
+                        ctx.lineTo(nx + noteSpacing, y - 5);
+                        ctx.strokeStyle = '#CCC';
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+                    }
+
+                    // Dot
+                    ctx.beginPath();
+                    ctx.arc(nx, y - 5, 18, 0, Math.PI*2);
+                    ctx.fillStyle = '#EEE';
+                    ctx.fill();
+                    ctx.strokeStyle = '#CCC';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Text
+                    ctx.fillStyle = '#333';
+                    ctx.font = 'bold 16px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(n, nx, y - 3);
+                });
+            }
+
+            // Footer Branding inside Image
+            ctx.fillStyle = COLORS.branding;
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText("SensementMusic.com", W / 2, H - 20); 
+        }
+
+        // ==========================================
+        // 4. INIT & EVENTS
+        // ==========================================
+
+        function init() {
+            const rootSelect = document.getElementById('rootSelect');
+            const scaleSelect = document.getElementById('scaleSelect');
+
+            // Populate Roots
+            CHROMATIC_SCALE.forEach(note => {
+                const opt = document.createElement('option');
+                opt.value = note;
+                opt.text = note;
+                rootSelect.add(opt);
+            });
+
+            // Populate Scales
+            Object.keys(VALID_SCALES).forEach(scale => {
+                const opt = document.createElement('option');
+                opt.value = scale;
+                opt.text = scale;
+                scaleSelect.add(opt);
+            });
+
+            // Set Defaults
+            rootSelect.value = 'A';
+            scaleSelect.value = 'Minor';
+
+            generateVisuals();
+        }
+
+        function generateVisuals() {
+            const root = document.getElementById('rootSelect').value;
+            const scale = document.getElementById('scaleSelect').value;
+            
+            drawFretboard(root, scale);
+            drawTheoryChart(root, scale);
+        }
+
+        function downloadImages() {
+            const root = document.getElementById('rootSelect').value;
+            const scale = document.getElementById('scaleSelect').value;
+            const cleanScaleName = scale.replace(' ', '_');
+
+            // Download Fretboard
+            const link1 = document.createElement('a');
+            link1.download = `${root}_${cleanScaleName}_fretboard.png`;
+            link1.href = document.getElementById('fretboardCanvas').toDataURL();
+            link1.click();
+
+            // Download Theory
+            setTimeout(() => {
+                const link2 = document.createElement('a');
+                link2.download = `${root}_${cleanScaleName}_theory.png`;
+                link2.href = document.getElementById('theoryCanvas').toDataURL();
+                link2.click();
+            }, 500);
+        }
+
+        // Run on load
+        window.onload = init;
+
+    </script>
+</body>
+</html>
